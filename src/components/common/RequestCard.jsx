@@ -3,8 +3,24 @@
  * Displays a service request in card format (Chakra UI v3)
  */
 import { Box, Heading, Text, HStack, VStack, Badge, Flex, IconButton } from '@chakra-ui/react';
-import { FaMapMarkerAlt, FaCalendarAlt, FaExclamationCircle, FaHeart, FaRegHeart, FaThLarge, FaBroom, FaCar, FaWrench, FaBook, FaUtensils, FaLaptop, FaBox, FaSpa } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaCalendarAlt, FaExclamationCircle, FaHeart, FaRegHeart, FaThLarge, FaBroom, FaCar, FaWrench, FaBook, FaUtensils, FaLaptop, FaBox, FaSpa, FaRoute, FaClock } from 'react-icons/fa';
 import { useLanguage } from '../../i18n';
+
+// Format posted time to human readable
+const formatPostedTime = (minutes, t) => {
+  if (minutes < 5) {
+    return t('cards.justNow');
+  }
+  if (minutes < 60) {
+    return `${minutes} ${t('cards.minutes')} ${t('cards.postedAgo')}`;
+  }
+  if (minutes < 1440) {
+    const hours = Math.floor(minutes / 60);
+    return `${hours} ${t('cards.hours')} ${t('cards.postedAgo')}`;
+  }
+  const days = Math.floor(minutes / 1440);
+  return `${days}d ${t('cards.postedAgo')}`;
+};
 
 // Map location IDs to translation keys
 const locationKeyMap = {
@@ -38,7 +54,7 @@ const categoryIconMap = {
 
 const RequestCard = ({ request, onClick, isFavorite, onToggleFavorite }) => {
   const { t } = useLanguage();
-  const { titleKey, descriptionKey, budget, requester, locationId, dateNeededKey, dateNeeded, urgency, category } = request;
+  const { titleKey, descriptionKey, budget, requester, locationId, dateNeededKey, dateNeeded, urgency, category, distance, postedMinutesAgo } = request;
 
   const categoryInfo = categoryIconMap[category] || categoryIconMap.all;
   const CategoryIcon = categoryInfo.icon;
@@ -130,16 +146,24 @@ const RequestCard = ({ request, onClick, isFavorite, onToggleFavorite }) => {
         {t(descriptionKey)}
       </Text>
 
-      {/* Footer: Location and Date */}
-      <HStack gap={4} fontSize="xs" color="gray.500">
+      {/* Footer: Location, Distance, Posted Time, and Date */}
+      <HStack gap={3} fontSize="xs" color="gray.500" flexWrap="wrap">
         <HStack gap={1}>
           <Box as={FaMapMarkerAlt} />
           <Text lineClamp={1}>{t(`location.${locationKeyMap[locationId]}`)}</Text>
         </HStack>
-        <HStack gap={1}>
-          <Box as={FaCalendarAlt} />
-          <Text>{dateNeededKey ? t(dateNeededKey) : dateNeeded}</Text>
-        </HStack>
+        {distance && (
+          <HStack gap={1} color="blue.500">
+            <Box as={FaRoute} />
+            <Text fontWeight="medium">{distance} {t('cards.kmAway')}</Text>
+          </HStack>
+        )}
+        {postedMinutesAgo !== undefined && (
+          <HStack gap={1} color="orange.500">
+            <Box as={FaClock} />
+            <Text fontWeight="medium">{formatPostedTime(postedMinutesAgo, t)}</Text>
+          </HStack>
+        )}
       </HStack>
     </Box>
   );

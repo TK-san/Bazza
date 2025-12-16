@@ -12,6 +12,7 @@ import LocationFilter from '../components/common/LocationFilter';
 import { categories, locations, mockRequests } from '../data/mockServices';
 import usePullToRefresh from '../hooks/usePullToRefresh';
 import { useFavoritesContext } from '../context/FavoritesContext';
+import { useRecentlyViewedContext } from '../context/RecentlyViewedContext';
 import { useLanguage } from '../i18n';
 
 const RequestsPage = ({ initialCategory = 'all', onBack }) => {
@@ -21,6 +22,12 @@ const RequestsPage = ({ initialCategory = 'all', onBack }) => {
   const [requests, setRequests] = useState(mockRequests);
 
   const { isFavorite, toggleFavorite } = useFavoritesContext();
+  const { addToRecentlyViewed } = useRecentlyViewedContext();
+
+  // Handle request card click - track as recently viewed
+  const handleRequestClick = (requestId) => {
+    addToRecentlyViewed('requests', requestId);
+  };
 
   // Filter requests based on selected category and location
   const filteredRequests = useMemo(() => {
@@ -129,7 +136,7 @@ const RequestsPage = ({ initialCategory = 'all', onBack }) => {
                 request={request}
                 isFavorite={isFavorite('requests', request.id)}
                 onToggleFavorite={() => toggleFavorite('requests', request.id)}
-                onClick={() => console.log('View request:', request.id)}
+                onClick={() => handleRequestClick(request.id)}
               />
             </Box>
           ))}

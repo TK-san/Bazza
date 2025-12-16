@@ -7,6 +7,7 @@ import { Box } from '@chakra-ui/react';
 
 // Context Providers
 import { FavoritesProvider } from './context/FavoritesContext';
+import { RecentlyViewedProvider } from './context/RecentlyViewedContext';
 import { LanguageProvider, useLanguage } from './i18n';
 
 // Layout Components
@@ -175,22 +176,26 @@ function AppContent() {
   if (currentScreen !== 'main' && currentScreen !== 'favorites' && currentScreen !== 'language') {
     return (
       <FavoritesProvider>
-        <Box
-          maxW="480px"
-          mx="auto"
-          minH="100vh"
-          bg="white"
-          boxShadow={{ base: 'none', md: 'xl' }}
-        >
-          {renderScreen()}
-        </Box>
+        <RecentlyViewedProvider>
+          <Box
+            maxW="480px"
+            mx="auto"
+            minH="100vh"
+            bg="white"
+            boxShadow={{ base: 'none', md: 'xl' }}
+          >
+            {renderScreen()}
+          </Box>
+        </RecentlyViewedProvider>
       </FavoritesProvider>
     );
   }
 
   return (
     <FavoritesProvider>
-      {renderScreen()}
+      <RecentlyViewedProvider>
+        {renderScreen()}
+      </RecentlyViewedProvider>
     </FavoritesProvider>
   );
 }

@@ -106,6 +106,10 @@ const translations = {
       language: 'Language',
       languageDesc: 'Change app language',
       signOut: 'Sign Out',
+      recentlyViewed: 'Recently Viewed',
+      recentlyViewedDesc: 'Services you browsed',
+      noRecentlyViewed: 'No recently viewed items',
+      browseToSee: 'Browse services to see them here',
     },
 
     // Favorites Page
@@ -129,6 +133,12 @@ const translations = {
       urgent: 'URGENT',
       addToFavorites: 'Add to favorites',
       removeFromFavorites: 'Remove from favorites',
+      kmAway: 'km away',
+      respondsIn: 'Responds in',
+      minutes: 'min',
+      hours: 'hr',
+      postedAgo: 'ago',
+      justNow: 'Just now',
     },
 
     // Location Filter
@@ -363,6 +373,10 @@ const translations = {
       language: 'Bahasa',
       languageDesc: 'Tukar bahasa aplikasi',
       signOut: 'Log Keluar',
+      recentlyViewed: 'Baru Dilihat',
+      recentlyViewedDesc: 'Perkhidmatan yang anda layari',
+      noRecentlyViewed: 'Tiada item baru dilihat',
+      browseToSee: 'Layari perkhidmatan untuk melihatnya di sini',
     },
 
     // Favorites Page
@@ -386,6 +400,12 @@ const translations = {
       urgent: 'SEGERA',
       addToFavorites: 'Tambah ke kegemaran',
       removeFromFavorites: 'Buang dari kegemaran',
+      kmAway: 'km',
+      respondsIn: 'Respons dalam',
+      minutes: 'min',
+      hours: 'jam',
+      postedAgo: 'lalu',
+      justNow: 'Baru sahaja',
     },
 
     // Location Filter
@@ -620,6 +640,10 @@ const translations = {
       language: '语言',
       languageDesc: '更改应用语言',
       signOut: '退出登录',
+      recentlyViewed: '最近浏览',
+      recentlyViewedDesc: '您浏览过的服务',
+      noRecentlyViewed: '暂无浏览记录',
+      browseToSee: '浏览服务后将显示在这里',
     },
 
     // Favorites Page
@@ -643,6 +667,12 @@ const translations = {
       urgent: '紧急',
       addToFavorites: '添加到收藏',
       removeFromFavorites: '从收藏中移除',
+      kmAway: '公里',
+      respondsIn: '响应时间',
+      minutes: '分钟',
+      hours: '小时',
+      postedAgo: '前',
+      justNow: '刚刚',
     },
 
     // Location Filter

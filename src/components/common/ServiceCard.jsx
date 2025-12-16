@@ -3,8 +3,17 @@
  * Displays a service offer in card format (Chakra UI v3)
  */
 import { Box, Heading, Text, HStack, VStack, Badge, Flex, IconButton } from '@chakra-ui/react';
-import { FaStar, FaMapMarkerAlt, FaClock, FaHeart, FaRegHeart, FaThLarge, FaBroom, FaCar, FaWrench, FaBook, FaUtensils, FaLaptop, FaBox, FaSpa } from 'react-icons/fa';
+import { FaStar, FaMapMarkerAlt, FaClock, FaHeart, FaRegHeart, FaThLarge, FaBroom, FaCar, FaWrench, FaBook, FaUtensils, FaLaptop, FaBox, FaSpa, FaRoute, FaBolt } from 'react-icons/fa';
 import { useLanguage } from '../../i18n';
+
+// Format response time to human readable
+const formatResponseTime = (minutes, t) => {
+  if (minutes < 60) {
+    return `${minutes} ${t('cards.minutes')}`;
+  }
+  const hours = Math.floor(minutes / 60);
+  return `${hours} ${t('cards.hours')}`;
+};
 
 // Map location IDs to translation keys
 const locationKeyMap = {
@@ -38,7 +47,7 @@ const categoryIconMap = {
 
 const ServiceCard = ({ service, onClick, isFavorite, onToggleFavorite }) => {
   const { t } = useLanguage();
-  const { titleKey, descriptionKey, price, provider, locationId, availabilityKey, category } = service;
+  const { titleKey, descriptionKey, price, provider, locationId, availabilityKey, category, distance, responseTime } = service;
 
   const categoryInfo = categoryIconMap[category] || categoryIconMap.all;
   const CategoryIcon = categoryInfo.icon;
@@ -125,16 +134,24 @@ const ServiceCard = ({ service, onClick, isFavorite, onToggleFavorite }) => {
         {t(descriptionKey)}
       </Text>
 
-      {/* Footer: Location and Availability */}
-      <HStack gap={4} fontSize="xs" color="gray.500">
+      {/* Footer: Location, Distance, and Response Time */}
+      <HStack gap={3} fontSize="xs" color="gray.500" flexWrap="wrap">
         <HStack gap={1}>
           <Box as={FaMapMarkerAlt} />
           <Text lineClamp={1}>{t(`location.${locationKeyMap[locationId]}`)}</Text>
         </HStack>
-        <HStack gap={1}>
-          <Box as={FaClock} />
-          <Text>{t(availabilityKey)}</Text>
-        </HStack>
+        {distance && (
+          <HStack gap={1} color="blue.500">
+            <Box as={FaRoute} />
+            <Text fontWeight="medium">{distance} {t('cards.kmAway')}</Text>
+          </HStack>
+        )}
+        {responseTime && (
+          <HStack gap={1} color="green.500">
+            <Box as={FaBolt} />
+            <Text fontWeight="medium">{t('cards.respondsIn')} {formatResponseTime(responseTime, t)}</Text>
+          </HStack>
+        )}
       </HStack>
     </Box>
   );

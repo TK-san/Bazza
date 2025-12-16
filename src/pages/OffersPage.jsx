@@ -12,6 +12,7 @@ import LocationFilter from '../components/common/LocationFilter';
 import { categories, locations, mockOffers } from '../data/mockServices';
 import usePullToRefresh from '../hooks/usePullToRefresh';
 import { useFavoritesContext } from '../context/FavoritesContext';
+import { useRecentlyViewedContext } from '../context/RecentlyViewedContext';
 import { useLanguage } from '../i18n';
 
 const OffersPage = ({ initialCategory = 'all', onBack }) => {
@@ -21,6 +22,12 @@ const OffersPage = ({ initialCategory = 'all', onBack }) => {
   const [offers, setOffers] = useState(mockOffers);
 
   const { isFavorite, toggleFavorite } = useFavoritesContext();
+  const { addToRecentlyViewed } = useRecentlyViewedContext();
+
+  // Handle service card click - track as recently viewed
+  const handleServiceClick = (offerId) => {
+    addToRecentlyViewed('offers', offerId);
+  };
 
   // Filter services based on selected category and location
   const filteredOffers = useMemo(() => {
@@ -129,7 +136,7 @@ const OffersPage = ({ initialCategory = 'all', onBack }) => {
                 service={offer}
                 isFavorite={isFavorite('offers', offer.id)}
                 onToggleFavorite={() => toggleFavorite('offers', offer.id)}
-                onClick={() => console.log('View service:', offer.id)}
+                onClick={() => handleServiceClick(offer.id)}
               />
             </Box>
           ))}

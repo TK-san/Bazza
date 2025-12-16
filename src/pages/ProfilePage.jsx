@@ -4,14 +4,32 @@
  */
 import { Box, VStack, Heading, Text, Button, HStack, Separator, Badge } from '@chakra-ui/react';
 import { Avatar } from '@chakra-ui/react';
-import { FaCog, FaHistory, FaStar, FaPlus, FaSignOutAlt, FaHeart, FaGlobe } from 'react-icons/fa';
+import { FaCog, FaHistory, FaStar, FaPlus, FaSignOutAlt, FaHeart, FaGlobe, FaEye } from 'react-icons/fa';
 import { useFavoritesContext } from '../context/FavoritesContext';
+import { useRecentlyViewedContext } from '../context/RecentlyViewedContext';
 import { useLanguage } from '../i18n';
+import { mockOffers, mockRequests } from '../data/mockServices';
+import ServiceCard from '../components/common/ServiceCard';
+import RequestCard from '../components/common/RequestCard';
 
 const ProfilePage = ({ onSignOut, onViewFavorites, onChangeLanguage }) => {
-  const { getFavoriteCount } = useFavoritesContext();
+  const { getFavoriteCount, isFavorite, toggleFavorite } = useFavoritesContext();
+  const { getRecentlyViewed, getRecentCount } = useRecentlyViewedContext();
   const { t } = useLanguage();
   const totalFavorites = getFavoriteCount();
+  const totalRecentlyViewed = getRecentCount();
+
+  // Get recently viewed items with full data
+  const recentOfferIds = getRecentlyViewed('offers');
+  const recentRequestIds = getRecentlyViewed('requests');
+  const recentOffers = recentOfferIds
+    .map(id => mockOffers.find(o => o.id === id))
+    .filter(Boolean)
+    .slice(0, 3);
+  const recentRequests = recentRequestIds
+    .map(id => mockRequests.find(r => r.id === id))
+    .filter(Boolean)
+    .slice(0, 3);
 
   // Placeholder menu items
   const menuItems = [
@@ -22,6 +40,13 @@ const ProfilePage = ({ onSignOut, onViewFavorites, onChangeLanguage }) => {
       badge: totalFavorites > 0 ? totalFavorites : null,
       badgeColor: 'red',
       onClick: onViewFavorites,
+    },
+    {
+      icon: FaEye,
+      label: t('profile.recentlyViewed'),
+      sublabel: t('profile.recentlyViewedDesc'),
+      badge: totalRecentlyViewed > 0 ? totalRecentlyViewed : null,
+      badgeColor: 'blue',
     },
     { icon: FaHistory, label: t('profile.myActivity'), sublabel: t('profile.activityDesc') },
     { icon: FaStar, label: t('profile.reviews'), sublabel: t('profile.reviewsDesc') },
@@ -96,7 +121,7 @@ const ProfilePage = ({ onSignOut, onViewFavorites, onChangeLanguage }) => {
                 gap={3}
                 onClick={item.onClick}
               >
-                <Box as={IconComponent} boxSize={5} color={item.badge ? 'red.500' : 'gray.500'} />
+                <Box as={IconComponent} boxSize={5} color={item.badgeColor ? `${item.badgeColor}.500` : 'gray.500'} />
                 <VStack align="start" gap={0} flex={1}>
                   <HStack gap={2}>
                     <Text fontWeight="medium">{item.label}</Text>
@@ -121,6 +146,33 @@ const ProfilePage = ({ onSignOut, onViewFavorites, onChangeLanguage }) => {
           );
         })}
       </Box>
+
+      {/* Recently Viewed Section */}
+      {(recentOffers.length > 0 || recentRequests.length > 0) && (
+        <Box mb={4}>
+          <Heading size="sm" mb={3} color="gray.600">
+            {t('profile.recentlyViewed')}
+          </Heading>
+          <Box mx={-4}>
+            {recentOffers.map(offer => (
+              <ServiceCard
+                key={`offer-${offer.id}`}
+                service={offer}
+                isFavorite={isFavorite('offers', offer.id)}
+                onToggleFavorite={() => toggleFavorite('offers', offer.id)}
+              />
+            ))}
+            {recentRequests.map(request => (
+              <RequestCard
+                key={`request-${request.id}`}
+                request={request}
+                isFavorite={isFavorite('requests', request.id)}
+                onToggleFavorite={() => toggleFavorite('requests', request.id)}
+              />
+            ))}
+          </Box>
+        </Box>
+      )}
 
       {/* Sign Out Button */}
       <Button

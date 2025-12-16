@@ -52,6 +52,8 @@ export const mockOffers = [
     },
     locationId: 'pj',
     availabilityKey: 'availability.weekends',
+    distance: 3.2,
+    responseTime: 30,
   },
   {
     id: 2,
@@ -68,6 +70,8 @@ export const mockOffers = [
     },
     locationId: 'kl',
     availabilityKey: 'availability.twentyFourSeven',
+    distance: 5.8,
+    responseTime: 15,
   },
   {
     id: 3,
@@ -84,6 +88,8 @@ export const mockOffers = [
     },
     locationId: 'kl',
     availabilityKey: 'availability.monSat',
+    distance: 4.5,
+    responseTime: 60,
   },
   {
     id: 4,
@@ -100,6 +106,8 @@ export const mockOffers = [
     },
     locationId: 'subang',
     availabilityKey: 'availability.eveningsWeekends',
+    distance: 8.1,
+    responseTime: 120,
   },
   {
     id: 5,
@@ -116,6 +124,8 @@ export const mockOffers = [
     },
     locationId: 'shah-alam',
     availabilityKey: 'availability.threeDayNotice',
+    distance: 12.3,
+    responseTime: 180,
   },
   {
     id: 6,
@@ -132,6 +142,8 @@ export const mockOffers = [
     },
     locationId: 'kl',
     availabilityKey: 'availability.flexible',
+    distance: 2.1,
+    responseTime: 45,
   },
   {
     id: 7,
@@ -148,6 +160,8 @@ export const mockOffers = [
     },
     locationId: 'cheras',
     availabilityKey: 'availability.sevenAmNinePm',
+    distance: 9.7,
+    responseTime: 20,
   },
   {
     id: 8,
@@ -164,6 +178,8 @@ export const mockOffers = [
     },
     locationId: 'bangsar',
     availabilityKey: 'availability.sixAmTenPm',
+    distance: 1.5,
+    responseTime: 10,
   },
 ];
 
@@ -182,6 +198,8 @@ export const mockRequests = [
     locationId: 'mont-kiara',
     dateNeededKey: 'dateNeeded.thisSaturday',
     urgency: 'normal',
+    distance: 6.2,
+    postedMinutesAgo: 45,
   },
   {
     id: 2,
@@ -196,6 +214,8 @@ export const mockRequests = [
     locationId: 'bangsar',
     dateNeededKey: 'dateNeeded.ongoing',
     urgency: 'normal',
+    distance: 2.8,
+    postedMinutesAgo: 120,
   },
   {
     id: 3,
@@ -210,6 +230,8 @@ export const mockRequests = [
     locationId: 'cheras',
     dateNeededKey: 'dateNeeded.todayTomorrow',
     urgency: 'urgent',
+    distance: 8.5,
+    postedMinutesAgo: 15,
   },
   {
     id: 4,
@@ -224,6 +246,8 @@ export const mockRequests = [
     locationId: 'putrajaya',
     dateNeeded: '15 Feb 2025',
     urgency: 'normal',
+    distance: 15.3,
+    postedMinutesAgo: 1440,
   },
   {
     id: 5,
@@ -238,6 +262,8 @@ export const mockRequests = [
     locationId: 'setapak',
     dateNeededKey: 'dateNeeded.ongoing',
     urgency: 'normal',
+    distance: 7.1,
+    postedMinutesAgo: 360,
   },
   {
     id: 6,
@@ -252,5 +278,7 @@ export const mockRequests = [
     locationId: 'damansara',
     dateNeededKey: 'dateNeeded.daily',
     urgency: 'normal',
+    distance: 4.2,
+    postedMinutesAgo: 30,
   },
 ];
