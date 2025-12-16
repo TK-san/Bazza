@@ -17,6 +17,8 @@ import BottomNav from './components/common/BottomNav';
 import HomePage from './pages/HomePage';
 import SignInPage from './pages/SignInPage';
 import RegisterPage from './pages/RegisterPage';
+import OffersLandingPage from './pages/OffersLandingPage';
+import RequestsLandingPage from './pages/RequestsLandingPage';
 import OffersPage from './pages/OffersPage';
 import RequestsPage from './pages/RequestsPage';
 import ProfilePage from './pages/ProfilePage';
@@ -33,11 +35,27 @@ function AppContent() {
   // Active tab for main app: 'offers' | 'requests' | 'profile'
   const [activeTab, setActiveTab] = useState('offers');
 
+  // Sub-view state for offers/requests tabs: null (landing) or category id (filtered list)
+  const [offersCategory, setOffersCategory] = useState(null);
+  const [requestsCategory, setRequestsCategory] = useState(null);
+
   // Navigation handler
   const handleNavigate = (screen) => {
     setCurrentScreen(screen);
     if (screen === 'main') {
       setActiveTab('offers'); // Reset to offers tab when entering main app
+      setOffersCategory(null); // Reset to landing page
+      setRequestsCategory(null);
+    }
+  };
+
+  // Handle tab change - reset to landing page
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+    if (tab === 'offers') {
+      setOffersCategory(null);
+    } else if (tab === 'requests') {
+      setRequestsCategory(null);
     }
   };
 
@@ -59,9 +77,27 @@ function AppContent() {
   const renderTabPage = () => {
     switch (activeTab) {
       case 'offers':
-        return <OffersPage />;
+        // Show landing page or filtered list based on offersCategory
+        if (offersCategory === null) {
+          return <OffersLandingPage onSelectCategory={setOffersCategory} />;
+        }
+        return (
+          <OffersPage
+            initialCategory={offersCategory}
+            onBack={() => setOffersCategory(null)}
+          />
+        );
       case 'requests':
-        return <RequestsPage />;
+        // Show landing page or filtered list based on requestsCategory
+        if (requestsCategory === null) {
+          return <RequestsLandingPage onSelectCategory={setRequestsCategory} />;
+        }
+        return (
+          <RequestsPage
+            initialCategory={requestsCategory}
+            onBack={() => setRequestsCategory(null)}
+          />
+        );
       case 'profile':
         return (
           <ProfilePage
@@ -71,7 +107,7 @@ function AppContent() {
           />
         );
       default:
-        return <OffersPage />;
+        return <OffersLandingPage onSelectCategory={setOffersCategory} />;
     }
   };
 
@@ -127,7 +163,7 @@ function AppContent() {
             </Box>
 
             {/* Bottom Navigation */}
-            <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />
+            <BottomNav activeTab={activeTab} onTabChange={handleTabChange} />
           </Box>
         );
       default:

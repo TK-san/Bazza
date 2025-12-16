@@ -3,7 +3,8 @@
  * Displays requests from people seeking services (Chakra UI v3)
  */
 import { useState, useMemo, useCallback } from 'react';
-import { Box, VStack, Text, Heading } from '@chakra-ui/react';
+import { Box, VStack, Text, Heading, HStack, IconButton } from '@chakra-ui/react';
+import { FaArrowLeft } from 'react-icons/fa';
 import CategoryPill from '../components/common/CategoryPill';
 import RequestCard from '../components/common/RequestCard';
 import PullToRefresh from '../components/common/PullToRefresh';
@@ -13,9 +14,9 @@ import usePullToRefresh from '../hooks/usePullToRefresh';
 import { useFavoritesContext } from '../context/FavoritesContext';
 import { useLanguage } from '../i18n';
 
-const RequestsPage = () => {
+const RequestsPage = ({ initialCategory = 'all', onBack }) => {
   const { t } = useLanguage();
-  const [activeCategory, setActiveCategory] = useState('all');
+  const [activeCategory, setActiveCategory] = useState(initialCategory);
   const [activeLocation, setActiveLocation] = useState('all');
   const [requests, setRequests] = useState(mockRequests);
 
@@ -85,11 +86,24 @@ const RequestsPage = () => {
       >
         {/* Section Header */}
         <Box px={4} pt={4} pb={2}>
-          <Heading size="md" color="gray.800">
-            {t('requests.title')}
-          </Heading>
-          <Text fontSize="sm" color="gray.500">
-            {t('requests.subtitle')} • {filteredRequests.length} {t('requests.requestsCount')}
+          <HStack gap={2} mb={1}>
+            {onBack && (
+              <IconButton
+                aria-label="Go back"
+                variant="ghost"
+                size="sm"
+                borderRadius="full"
+                onClick={onBack}
+              >
+                <FaArrowLeft />
+              </IconButton>
+            )}
+            <Heading size="md" color="gray.800">
+              {activeCategory !== 'all' ? t(`categories.${activeCategory}`) : t('requests.title')}
+            </Heading>
+          </HStack>
+          <Text fontSize="sm" color="gray.500" ml={onBack ? 10 : 0}>
+            {filteredRequests.length} {t('requests.requestsCount')}
           </Text>
         </Box>
 

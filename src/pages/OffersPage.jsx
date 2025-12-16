@@ -3,7 +3,8 @@
  * Displays services being offered by providers (Chakra UI v3)
  */
 import { useState, useMemo, useCallback } from 'react';
-import { Box, VStack, Text, Heading } from '@chakra-ui/react';
+import { Box, VStack, Text, Heading, HStack, IconButton } from '@chakra-ui/react';
+import { FaArrowLeft } from 'react-icons/fa';
 import CategoryPill from '../components/common/CategoryPill';
 import ServiceCard from '../components/common/ServiceCard';
 import PullToRefresh from '../components/common/PullToRefresh';
@@ -13,9 +14,9 @@ import usePullToRefresh from '../hooks/usePullToRefresh';
 import { useFavoritesContext } from '../context/FavoritesContext';
 import { useLanguage } from '../i18n';
 
-const OffersPage = () => {
+const OffersPage = ({ initialCategory = 'all', onBack }) => {
   const { t } = useLanguage();
-  const [activeCategory, setActiveCategory] = useState('all');
+  const [activeCategory, setActiveCategory] = useState(initialCategory);
   const [activeLocation, setActiveLocation] = useState('all');
   const [offers, setOffers] = useState(mockOffers);
 
@@ -85,11 +86,24 @@ const OffersPage = () => {
       >
         {/* Section Header */}
         <Box px={4} pt={4} pb={2}>
-          <Heading size="md" color="gray.800">
-            {t('offers.title')}
-          </Heading>
-          <Text fontSize="sm" color="gray.500">
-            {t('offers.subtitle')} • {filteredOffers.length} {t('offers.services')}
+          <HStack gap={2} mb={1}>
+            {onBack && (
+              <IconButton
+                aria-label="Go back"
+                variant="ghost"
+                size="sm"
+                borderRadius="full"
+                onClick={onBack}
+              >
+                <FaArrowLeft />
+              </IconButton>
+            )}
+            <Heading size="md" color="gray.800">
+              {activeCategory !== 'all' ? t(`categories.${activeCategory}`) : t('offers.title')}
+            </Heading>
+          </HStack>
+          <Text fontSize="sm" color="gray.500" ml={onBack ? 10 : 0}>
+            {filteredOffers.length} {t('offers.services')}
           </Text>
         </Box>
 

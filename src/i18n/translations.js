@@ -74,6 +74,7 @@ const translations = {
       noServices: 'No services found',
       tryFilters: 'Try changing your filters',
       beFirst: 'Be the first to offer one!',
+      browseByCategory: 'Browse by Category',
     },
 
     // Requests Page
@@ -84,6 +85,7 @@ const translations = {
       noRequests: 'No requests found',
       tryFilters: 'Try changing your filters',
       checkLater: 'Check back later!',
+      browseByCategory: 'Browse by Category',
     },
 
     // Profile Page
@@ -329,6 +331,7 @@ const translations = {
       noServices: 'Tiada perkhidmatan dijumpai',
       tryFilters: 'Cuba tukar penapis anda',
       beFirst: 'Jadilah yang pertama menawarkan!',
+      browseByCategory: 'Layari mengikut Kategori',
     },
 
     // Requests Page
@@ -339,6 +342,7 @@ const translations = {
       noRequests: 'Tiada permintaan dijumpai',
       tryFilters: 'Cuba tukar penapis anda',
       checkLater: 'Semak kemudian!',
+      browseByCategory: 'Layari mengikut Kategori',
     },
 
     // Profile Page
@@ -584,6 +588,7 @@ const translations = {
       noServices: '未找到服务',
       tryFilters: '尝试更改筛选条件',
       beFirst: '成为第一个提供服务的人！',
+      browseByCategory: '按类别浏览',
     },
 
     // Requests Page
@@ -594,6 +599,7 @@ const translations = {
       noRequests: '未找到需求',
       tryFilters: '尝试更改筛选条件',
       checkLater: '稍后再来看看！',
+      browseByCategory: '按类别浏览',
     },
 
     // Profile Page
