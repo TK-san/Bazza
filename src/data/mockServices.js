@@ -1,0 +1,256 @@
+/**
+ * Mock Data for Bazza MVP
+ * Sample services and requests for Malaysia context
+ * Text content uses translation keys for i18n support
+ */
+
+// Categories available in the platform
+// Icons are React Icon component names from react-icons/fa
+export const categories = [
+  { id: 'all', icon: 'FaThLarge', color: 'blue.500' },
+  { id: 'cleaning', icon: 'FaBroom', color: 'green.500' },
+  { id: 'transport', icon: 'FaCar', color: 'purple.500' },
+  { id: 'repair', icon: 'FaWrench', color: 'orange.500' },
+  { id: 'tutoring', icon: 'FaBook', color: 'teal.500' },
+  { id: 'cooking', icon: 'FaUtensils', color: 'red.500' },
+  { id: 'tech', icon: 'FaLaptop', color: 'cyan.500' },
+  { id: 'errands', icon: 'FaBox', color: 'yellow.600' },
+  { id: 'beauty', icon: 'FaSpa', color: 'pink.500' },
+];
+
+// Locations for filtering (Klang Valley focused)
+export const locations = [
+  { id: 'all', region: null },
+  { id: 'kl', region: 'klangValley' },
+  { id: 'pj', region: 'klangValley' },
+  { id: 'subang', region: 'klangValley' },
+  { id: 'shah-alam', region: 'klangValley' },
+  { id: 'cheras', region: 'klangValley' },
+  { id: 'bangsar', region: 'klangValley' },
+  { id: 'mont-kiara', region: 'klangValley' },
+  { id: 'damansara', region: 'klangValley' },
+  { id: 'setapak', region: 'klangValley' },
+  { id: 'putrajaya', region: 'klangValley' },
+  { id: 'ampang', region: 'klangValley' },
+  { id: 'kepong', region: 'klangValley' },
+];
+
+// Services being offered by providers
+export const mockOffers = [
+  {
+    id: 1,
+    titleKey: 'serviceOffers.offer1.title',
+    descriptionKey: 'serviceOffers.offer1.description',
+    category: 'cleaning',
+    price: 'RM80-150',
+    priceType: 'per session',
+    provider: {
+      name: 'Aishah',
+      rating: 4.8,
+      completedJobs: 45,
+      avatar: null,
+    },
+    locationId: 'pj',
+    availabilityKey: 'availability.weekends',
+  },
+  {
+    id: 2,
+    titleKey: 'serviceOffers.offer2.title',
+    descriptionKey: 'serviceOffers.offer2.description',
+    category: 'transport',
+    price: 'RM80-120',
+    priceType: 'per trip',
+    provider: {
+      name: 'Rizal',
+      rating: 4.9,
+      completedJobs: 128,
+      avatar: null,
+    },
+    locationId: 'kl',
+    availabilityKey: 'availability.twentyFourSeven',
+  },
+  {
+    id: 3,
+    titleKey: 'serviceOffers.offer3.title',
+    descriptionKey: 'serviceOffers.offer3.description',
+    category: 'repair',
+    price: 'RM60-200',
+    priceType: 'per unit',
+    provider: {
+      name: 'Ah Keong',
+      rating: 4.7,
+      completedJobs: 89,
+      avatar: null,
+    },
+    locationId: 'kl',
+    availabilityKey: 'availability.monSat',
+  },
+  {
+    id: 4,
+    titleKey: 'serviceOffers.offer4.title',
+    descriptionKey: 'serviceOffers.offer4.description',
+    category: 'tutoring',
+    price: 'RM50-80',
+    priceType: 'per hour',
+    provider: {
+      name: 'Priya',
+      rating: 5.0,
+      completedJobs: 32,
+      avatar: null,
+    },
+    locationId: 'subang',
+    availabilityKey: 'availability.eveningsWeekends',
+  },
+  {
+    id: 5,
+    titleKey: 'serviceOffers.offer5.title',
+    descriptionKey: 'serviceOffers.offer5.description',
+    category: 'cooking',
+    price: 'RM8-15',
+    priceType: 'per pax',
+    provider: {
+      name: 'Makcik Kiah',
+      rating: 4.9,
+      completedJobs: 67,
+      avatar: null,
+    },
+    locationId: 'shah-alam',
+    availabilityKey: 'availability.threeDayNotice',
+  },
+  {
+    id: 6,
+    titleKey: 'serviceOffers.offer6.title',
+    descriptionKey: 'serviceOffers.offer6.description',
+    category: 'tech',
+    price: 'RM1500-5000',
+    priceType: 'per project',
+    provider: {
+      name: 'Daniel',
+      rating: 4.8,
+      completedJobs: 23,
+      avatar: null,
+    },
+    locationId: 'kl',
+    availabilityKey: 'availability.flexible',
+  },
+  {
+    id: 7,
+    titleKey: 'serviceOffers.offer7.title',
+    descriptionKey: 'serviceOffers.offer7.description',
+    category: 'repair',
+    price: 'RM80-300',
+    priceType: 'per job',
+    provider: {
+      name: 'Kumar',
+      rating: 4.6,
+      completedJobs: 156,
+      avatar: null,
+    },
+    locationId: 'cheras',
+    availabilityKey: 'availability.sevenAmNinePm',
+  },
+  {
+    id: 8,
+    titleKey: 'serviceOffers.offer8.title',
+    descriptionKey: 'serviceOffers.offer8.description',
+    category: 'errands',
+    price: 'RM100-150',
+    priceType: 'per session',
+    provider: {
+      name: 'Marcus',
+      rating: 4.9,
+      completedJobs: 78,
+      avatar: null,
+    },
+    locationId: 'bangsar',
+    availabilityKey: 'availability.sixAmTenPm',
+  },
+];
+
+// Requests from people seeking services
+export const mockRequests = [
+  {
+    id: 1,
+    titleKey: 'serviceRequests.request1.title',
+    descriptionKey: 'serviceRequests.request1.description',
+    category: 'errands',
+    budget: 'RM200-300',
+    requester: {
+      name: 'Ahmad',
+      avatar: null,
+    },
+    locationId: 'mont-kiara',
+    dateNeededKey: 'dateNeeded.thisSaturday',
+    urgency: 'normal',
+  },
+  {
+    id: 2,
+    titleKey: 'serviceRequests.request2.title',
+    descriptionKey: 'serviceRequests.request2.description',
+    category: 'tutoring',
+    budget: 'RM60-80/hour',
+    requester: {
+      name: 'Sarah',
+      avatar: null,
+    },
+    locationId: 'bangsar',
+    dateNeededKey: 'dateNeeded.ongoing',
+    urgency: 'normal',
+  },
+  {
+    id: 3,
+    titleKey: 'serviceRequests.request3.title',
+    descriptionKey: 'serviceRequests.request3.description',
+    category: 'repair',
+    budget: 'Up to RM200',
+    requester: {
+      name: 'Jason',
+      avatar: null,
+    },
+    locationId: 'cheras',
+    dateNeededKey: 'dateNeeded.todayTomorrow',
+    urgency: 'urgent',
+  },
+  {
+    id: 4,
+    titleKey: 'serviceRequests.request4.title',
+    descriptionKey: 'serviceRequests.request4.description',
+    category: 'beauty',
+    budget: 'RM500-800',
+    requester: {
+      name: 'Nurul',
+      avatar: null,
+    },
+    locationId: 'putrajaya',
+    dateNeeded: '15 Feb 2025',
+    urgency: 'normal',
+  },
+  {
+    id: 5,
+    titleKey: 'serviceRequests.request5.title',
+    descriptionKey: 'serviceRequests.request5.description',
+    category: 'cleaning',
+    budget: 'RM100-120/session',
+    requester: {
+      name: 'Michelle',
+      avatar: null,
+    },
+    locationId: 'setapak',
+    dateNeededKey: 'dateNeeded.ongoing',
+    urgency: 'normal',
+  },
+  {
+    id: 6,
+    titleKey: 'serviceRequests.request6.title',
+    descriptionKey: 'serviceRequests.request6.description',
+    category: 'errands',
+    budget: 'RM30-40/walk',
+    requester: {
+      name: 'Ben',
+      avatar: null,
+    },
+    locationId: 'damansara',
+    dateNeededKey: 'dateNeeded.daily',
+    urgency: 'normal',
+  },
+];
